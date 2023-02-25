@@ -23,13 +23,7 @@ The package is installed with
 
    $ pip install -e .
 
-in the top directory. To verify the proper functioning of the code
-a set of tests should be run with
-
-.. code-block:: bash
-
-   $ cd tests
-   $ python -m unittest
+in the top directory.
 
 
 Getting Started
