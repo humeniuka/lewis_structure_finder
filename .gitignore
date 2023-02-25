@@ -1,0 +1,8 @@
+/dist
+/*.egg-info
+# ignore architecture dependent files
+**/*.pyc
+__pychache__/
+# ignore emacs backup files
+*~
+\#*\#
