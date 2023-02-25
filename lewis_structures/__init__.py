@@ -10,8 +10,3 @@ References
 """
 
 __version__ = '0.0.1'
-
-__all__ = ['XYZ', 'lewis_structures']
-
-import XYZ
-from LewisStructures import lewis_structures
