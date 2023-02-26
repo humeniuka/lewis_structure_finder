@@ -3,6 +3,7 @@
 # The example from the README.
 #
 
+####
 from lewis_structures.LewisStructures import lewis_structures
 from lewis_structures.XYZ import read_xyz, connectivity_matrix
 
@@ -14,7 +15,8 @@ ConMat = connectivity_matrix(atomlist)
 max_depth=4
   
 # find equivalent Lewis structures and compute the average
-structures, structure_avg = lewis_structures(atomlist, ConMat, max_depth=max_depth)
+structures, structure_avg = lewis_structures(atomlist, ConMat,
+                                             charge=0, max_depth=max_depth)
 
 # For an conjugated system the average bond orders will be fractional numbers,
 # e.g. 1.5 for benzene.
@@ -33,3 +35,9 @@ plt.show()
 structure_avg.plot(title="average Lewis structure")
 plt.show()
 
+
+####
+from lewis_structures.LewisStructures import fragment_lewis_structure
+# find equivalent Lewis structures and compute the average
+structure_avg = fragment_lewis_structure(atomlist, ConMat,
+                                         charge=0, max_depth=max_depth)

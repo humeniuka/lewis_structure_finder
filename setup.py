@@ -19,8 +19,15 @@ this_dir = path.abspath(path.dirname(__file__))
 with open(path.join(this_dir, 'README.rst'), encoding='utf8') as f:
     long_description = f.read()
 
+# Scripts
+scripts = []
+for dirname, dirnames, filenames in os.walk('scripts'):
+    for filename in filenames:
+        if filename.endswith('.py'):
+            scripts.append(os.path.join(dirname, filename))
+    
 setup(
-    name='lewis_structures',
+    name='lewis_structure_finder',
     version=get_property('__version__', 'lewis_structures'),
     description='The Lewis structure (bond orders, formal charges and lone electron pairs) of a molecular is determined from its connectivity using linear programming.',
     long_description=long_description,
@@ -38,12 +45,13 @@ setup(
         'Topic :: Scientific/Engineering :: Physics',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
-    url='https://github.com/humeniuka/lewis_structures',
+    url='https://github.com/humeniuka/lewis_structure_finder',
     author='Alexander Humeniuk',
     author_email='alexander.humeniuk@gmail.com',
     license='LICENSE.txt',
     packages=find_packages(),
     install_requires=['numpy', 'matplotlib'],
+    scripts=scripts,
     include_package_data=True,
     zip_safe=False,
 )

@@ -4,7 +4,7 @@ Bond Order Assignment using Linear Programming
 One or more valid Lewis structures are determined for a molecule
 based only on the elements and atom connectivities.
 Bond orders, formal charges and lone electron pairs are assigned
-with the help of linear programming as described in Froeyen and Herdewijn (2005) [1]_
+with the help of linear programming [1]_ as described in Froeyen and Herdewijn (2005) [2]_
 
 
 Requirements
@@ -49,7 +49,9 @@ The following example computes the two Lewis structures of benzene:
   max_depth=4
   
   # find equivalent Lewis structures and compute the average
-  structures, structure_avg = lewis_structures(atomlist, ConMat, max_depth=max_depth)
+  structures, structure_avg = lewis_structures(atomlist, ConMat,
+		charge=0,
+		max_depth=max_depth)
 
   # For an conjugated system the average bond orders will be fractional numbers,
   # e.g. 1.5 for benzene.
@@ -69,14 +71,50 @@ The following example computes the two Lewis structures of benzene:
   plt.show()
 
 
+If a file contains multiple disconnected fragments, it is more efficient to assign
+the Lewis structures to the individual molecules and then combine the results.
+For identical fragment the calculation is done only once.
+Because the number of combined Lewis structures grows exponentially,
+only the average Lewis structure of the system is returned:
+
+.. code-block:: python
+		
+   from lewis_structures.LewisStructures import fragment_lewis_structure
+   
+   # find equivalent Lewis structures and compute the average
+   structure_avg = fragment_lewis_structure(atomlist, ConMat,
+		charge=0, max_depth=max_depth)
+
+
+Command Line
+------------
+
+There is also a command line tool for converting xyz-files to Tripos mol2 files
+after assigning bond orders and formal charges:
+
+.. code-block:: bash
+
+   xyz2mol2.py examples/dipolar_merocyanine.xyz /tmp/dipolar_merocyanine.mol2 --plot --max_depth=4
+
+
+The bond orders and partial charges are determined by averaging
+over all equivalent Lewis structures that can be found up to a certain depth.
+
+For the dipolar merocyanine dye the average Lewis structure clearly shows some
+charge transfer from the donor unit to the dicyanovinyl acceptor:
+
+.. image:: examples/dipolar_merocyanine_lewis_structure_avg.png
+	   
+
+  
 ----------
 References
 ----------
-.. [1] Froeyen,M. and Herdewijn,P.
+.. [1] Jiri Matousek, Bernd Gaertner
+    "Understanding and Using Linear Programming", Springer, 2007.
+
+.. [2] Froeyen,M. and Herdewijn,P.
     "Correct Bond Order Assignment in a Molecular Framework Using Integer Linear Programming with Application to Molecules Where Only Non-Hydrogen Atom Coordinates Are Available",
     J. Chem. Inf. Model., 2005, 45, 1267-1274.
     https://doi.org/10.1021/ci049645z
        
-.. [2] Jiri Matousek, Bernd Gaertner
-    "Understanding and Using Linear Programming", Springer, 2007.
-

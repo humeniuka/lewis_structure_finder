@@ -87,7 +87,7 @@ class LewisStructure:
                 label += r"$^{%+d}$" % charge
             else:
                 # fractional charges
-                label += r"$^{%+f}$" % charge
+                label += r"$^{%+4.3f}$" % charge
                 
             ax.text(x,y,z, label, None,
                     verticalalignment='center', horizontalalignment='center',
