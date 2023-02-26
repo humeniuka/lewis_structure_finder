@@ -59,6 +59,8 @@ USER_CHARGES
             bond_type = int(bo)
         elif 1.0 < bo < 2.0:
             bond_type = 'ar'
+        elif 2.0 < bo:
+            bond_type = 3
         else:
             print(f"WARNING: strange bond order {bo} for bond between atoms {origin_atom_id} and {target_atom_id}")
             bond_type = 'un'
