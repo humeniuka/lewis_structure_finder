@@ -94,7 +94,7 @@ after assigning bond orders and formal charges:
 
 .. code-block:: bash
 
-   xyz2mol2.py examples/dipolar_merocyanine.xyz /tmp/dipolar_merocyanine.mol2 --plot --max_depth=4
+   xyz2mol2.py examples/dipolar_merocyanine.xyz dipolar_merocyanine.mol2 --plot --max_depth=4
 
 
 The bond orders and partial charges are determined by averaging
