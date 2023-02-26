@@ -42,13 +42,22 @@ if __name__ == "__main__":
 
     atomlist = XYZ.read_xyz(args.xyz_file)[0]
     ConMat = XYZ.connectivity_matrix(atomlist)
-    
-    structure_avg = LewisStructures.fragment_lewis_structure(
-        atomlist,
-        ConMat,
-        charge=args.charge,
-        max_depth=args.max_depth)
 
+    if args.charge == 0:
+        structure_avg = LewisStructures.fragment_lewis_structure(
+            atomlist,
+            ConMat,
+            charge=args.charge,
+            max_depth=args.max_depth)
+    else:
+        # For charged system it is not clear which fragment the charge should
+        # be assigned to, so we have to treat the whole system.
+        structures, structure_avg = LewisStructures.lewis_structures(
+            atomlist,
+            ConMat,
+            charge=args.charge,
+            max_depth=args.max_depth)
+        
     # save MOL2
     structure_avg.write_mol2(args.mol2_file)
 
